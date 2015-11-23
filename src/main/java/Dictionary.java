@@ -22,6 +22,22 @@ public class Dictionary {
         return al;
     }
 
+    protected static ArrayList<String> getDictionary() {
+        Path dictionaryPath = Paths.get(dicPath);
+        ArrayList<String> dic = new ArrayList<>();
+        try (BufferedReader reader = Files.newBufferedReader(dictionaryPath, Charset.defaultCharset())) {
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                dic.add(line);
+            }
+            return dic;
+        } catch (IOException e) {
+            System.out.println("IO error: " + e.getMessage());
+        }
+        return null;
+    }
+
     protected static ArrayList<String> setDictionary() {
         Path dictionaryPath = Paths.get(dicPath);
         Path editedDictionaryPath = Paths.get(editedDicPath);

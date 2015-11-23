@@ -68,7 +68,7 @@ public class Trie {
     // Fill the structure with the vocabulary's words
     protected static Trie fillTrie() {
         Trie t = new Trie();
-        ArrayList<String> dic = Dictionary.setDictionary();
+        ArrayList<String> dic = Dictionary.getDictionary();
         for (String s : dic) {
             t.insert(s);
         }

@@ -3,31 +3,27 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
-public class SeparateWords {
+public class Separator {
     static Trie t;
-    static Map<Integer, String> wordsMap;
+    static Map<Integer, String> resultMap;
     static int wordsQuantity = Integer.MAX_VALUE;
     static StringBuilder prefix;
 
     public static void main(String[] args) {
         t = Trie.fillTrie();
-        wordsMap = new HashMap<>();
+        resultMap = new HashMap<>();
         prefix = new StringBuilder();
 
-        String test =
-                "foodbridgecoolbadbedgoalaimobjectiveboygirldogcatlock" +
-                        "keyforkclearboardchairtabledeskcore";
-        // Console input
+        String test = "thefollowingtaskwillalsobeaplusifsolvedyoucanperformspecialprocessingoftheinstructionsfieldoftheordersupposesomewordsoftheinstructionsfieldwereunintentionallygluedtogetherlikethisasortoftypingerrorwhensomewhitespacesomittedsecurityonthewebisbasedonavarietyofmechanismsincludinganunderlyingconceptoftrustknownasthesameoriginpolicygivenaninstructionsstringlikethisandadictionaryofvalidenglishwordsyoushouldreplaceeachcontinuouschainwhichisnotfoundinthedictionarywithaspaceseparatedsequenceofdictionarywordsonavarietyofmechanismscanbereplacedwithonavarietyofmechanismsifachaincannotbebrokenintowordsitisleftintactifachaincanbebrokeninmultipledifferentwaysasequencecontainingminimalnumberofwordsischosenforexamplethechainanunderlyingconceptcanbesplitupasanunderlyingconceptorasanunderlyingconceptwhichispreferred";
 //        System.out.print("Enter string to separate words: ");
 //        String input = inputString();
-        System.out.println("Result: " + separateWords(test));
+        System.out.println("Result: " + separate(test));
     }
 
     private static boolean isWord(String str) {
         return t.search(str);
     }
 
-    // for console input
     private static String inputString() {
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();
@@ -46,7 +42,7 @@ public class SeparateWords {
     // get separated string with the least quantity of words
     private static Integer getMinKey() {
         int minimumKey = Integer.MAX_VALUE;
-        Set<Integer> keys = wordsMap.keySet();
+        Set<Integer> keys = resultMap.keySet();
 
         for (Integer key : keys) {
             if (minimumKey > key) {
@@ -56,12 +52,12 @@ public class SeparateWords {
         return minimumKey;
     }
 
-    public static String separateWords(String str) {
-        getSeparatedWords(0, str.toLowerCase(), str.length(), "");
-        return wordsMap.get(getMinKey());
+    public static String separate(String str) {
+        separateHelper(0, str.toLowerCase(), str.length(), "");
+        return resultMap.get(getMinKey());
     }
 
-    private static void getSeparatedWords(int lvl, String str, int length, String result) {
+    private static void separateHelper(int lvl, String str, int length, String result) {
         for (int i = 1; i <= length; i++) {
             prefix.setLength(0);
             prefix.append(str.substring(0, i));
@@ -69,13 +65,12 @@ public class SeparateWords {
             if (isWord(prefix.toString())) {
                 if (i == length) {
                     result += prefix;
-                    if (countWords(result) < wordsQuantity) { // adding to HashMap all variants
-                        wordsMap.put(countWords(result), result); // excluding variants with less words then the previous one
+                    if (countWords(result) < wordsQuantity) {
+                        resultMap.put(countWords(result), result); // excluding variants with less words then the previous one
                         wordsQuantity = countWords(result);
-                    //    System.out.println("res: " + result); // for testing
                     }
                 }
-                getSeparatedWords(lvl + 1, str.substring(i, length), length - i, result + prefix + (" "));
+                separateHelper(lvl + 1, str.substring(i, length), length - i, result + prefix + (" "));
             }
         }
     }

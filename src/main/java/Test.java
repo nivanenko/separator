@@ -1,0 +1,9 @@
+public class Test {
+    public static void main(String[] args) {
+        String test1 = "thefollowingtaskwillalsobeaplusifsolvedyoucanperformspecialprocessingoftheinstructionsfieldoftheordersupposesomewordsoftheinstructionsfieldwereunintentionallygluedtogetherlikethisasortoftypingerrorwhensomewhitespacesomittedsecurityonthewebisbasedonavarietyofmechanismsincludinganunderlyingconceptoftrustknownasthesameoriginpolicygivenaninstructionsstringlikethisandadictionaryofvalidenglishwordsyoushouldreplaceeachcontinuouschainwhichisnotfoundinthedictionarywithaspaceseparatedsequenceofdictionarywordsonavarietyofmechanismscanbereplacedwithonavarietyofmechanismsifachaincannotbebrokenintowordsitisleftintactifachaincanbebrokeninmultipledifferentwaysasequencecontainingminimalnumberofwordsischosenforexamplethechainanunderlyingconceptcanbesplitupasanunderlyingconceptorasanunderlyingconceptwhichispreferred";
+        String test2 = "catdogpetrealgoodtastyveryoldcarmagicbigballtoy";
+        Segmentation seg = new Segmentation();
+
+        System.out.println(seg.segment(test1));
+    }
+}

@@ -1,5 +1,5 @@
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 class TrieNode {
@@ -18,11 +18,20 @@ class TrieNode {
 public class Trie {
     private final TrieNode root;
 
-    private Trie() {
+    public Trie() {
         root = new TrieNode();
     }
 
-    // Inserts the word into the trie
+    protected static Trie fillTrie() {
+        Trie t = new Trie();
+        HashSet<String> dic = DictionaryHelper.getDictionarySet();
+        if (dic == null) return null;
+        for (String s : dic) {
+            t.insert(s);
+        }
+        return t;
+    }
+
     private void insert(String word) {
         HashMap<Character, TrieNode> children = root.children;
 
@@ -61,16 +70,6 @@ public class Trie {
             } else {
                 return null;
             }
-        }
-        return t;
-    }
-
-    // Fill the structure with the vocabulary's words
-    protected static Trie fillTrie() {
-        Trie t = new Trie();
-        ArrayList<String> dic = Dictionary.getDictionary();
-        for (String s : dic) {
-            t.insert(s);
         }
         return t;
     }

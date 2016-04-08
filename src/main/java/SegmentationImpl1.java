@@ -2,12 +2,18 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class Segmentation {
-    private static Map<Integer, String> memory = new HashMap<>();
-    private static int words = Integer.MAX_VALUE;
-    private static Trie trie = Trie.fillTrie();
+public class SegmentationImpl1 {
+    private static Map<Integer, String> memory;
+    private static int words;
+    private static Trie trie;
 
-    public String segment(String str) {
+    public SegmentationImpl1() {
+        trie = Trie.fillTrie();
+        words = Integer.MAX_VALUE;
+        memory = new HashMap<>();
+    }
+
+    public String segmentString(String str) {
         segmentHelper(0, str.toLowerCase(), str.length(), "");
         return memory.get(getMinKey());
     }
@@ -29,6 +35,7 @@ public class Segmentation {
     private Integer getMinKey() {
         int minimumKey = Integer.MAX_VALUE;
         Set<Integer> keys = memory.keySet();
+        memory.entrySet();
 
         for (Integer key : keys) {
             if (minimumKey > key) {

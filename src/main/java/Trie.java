@@ -32,6 +32,11 @@ public class Trie {
         return t;
     }
 
+    public static int getDicSize() {
+        HashSet<String> dic = DictionaryHelper.getDictionarySet();
+        return dic != null ? dic.size() : -1;
+    }
+
     private void insert(String word) {
         HashMap<Character, TrieNode> children = root.children;
 
